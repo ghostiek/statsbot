@@ -1,0 +1,13 @@
+{
+  "name": "stats_bot",
+  "version": "0.0.1",
+  "description": "Bot for the Statistics Discord",
+  "main": "index.js",
+  "repository": "https://github.com/CMCarlsen/statsbot",
+  "author": {
+    "name": "Chris Carlsen",
+    "email": "chris@cmcarlsen.com",
+    "url": "http://www.github.com/CMCarlsen"
+  },
+  "license": "MIT"
+}
