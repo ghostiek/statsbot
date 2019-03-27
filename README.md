@@ -68,4 +68,4 @@ Assuming that you've updated your `config.json` file correctly, you should now b
 node bot.js
 ```
 
-And _viola_!
+And _voilà_!
