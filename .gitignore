@@ -1,3 +1,6 @@
+# Auth folder for the Disc bot
+auth/
+
 # Logs
 logs
 *.log
