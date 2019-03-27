@@ -11,6 +11,10 @@ const client = new Discord.Client();
 // Grab config info from the secret config.
 const { token, prefix } = require('./auth/config.json');
 
+// Simplistic parsing command for now, only contains one 'case' for the bot to handle.
+// Good launching off point for adding desired functionality.
+// Params:
+//  msg - DiscordJS "message" object.
 async function parseCommand(msg) {
   const args = msg.content
     .slice(prefix.length)
@@ -44,8 +48,10 @@ client.on('message', message => {
   }
 
   if (msg.startsWith(prefix)) {
-    return parseCommand(message);
+    parseCommand(message);
   }
+
+  return 0;
 });
 
 client.login(token);
