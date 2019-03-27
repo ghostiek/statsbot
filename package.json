@@ -2,12 +2,24 @@
   "name": "stats_bot",
   "version": "0.0.1",
   "description": "Bot for the Statistics Discord",
-  "main": "index.js",
+  "main": "bot.js",
   "repository": "https://github.com/CMCarlsen/statsbot",
   "author": {
     "name": "Chris Carlsen",
     "email": "chris@cmcarlsen.com",
     "url": "http://www.github.com/CMCarlsen"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "nodemon": "^1.18.10",
+    "prettier": "^1.16.4"
+  }
 }
