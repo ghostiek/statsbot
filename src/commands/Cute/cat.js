@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando');
 const path = require('path');
-const request = require('request-promise');
+const fetch = require('node-fetch');
 
 const groupName = __dirname
   .split(path.sep)
@@ -20,10 +20,9 @@ module.exports = class CatCommand extends Command {
   }
 
   async run(message) {
-    const content = await request.get(url);
-    const picurl = JSON.parse(content).file;
+    const content = await fetch(url).then(res => res.json());
     message.channel.send('Meow', {
-      files: [picurl]
+      files: [content.file],
     });
-  }
+  }    
 };

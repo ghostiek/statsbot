@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando');
 const path = require('path');
-const request = require('request-promise');
+const fetch = require('node-fetch');
 
 const groupName = __dirname
   .split(path.sep)
@@ -19,11 +19,11 @@ module.exports = class DogCommand extends Command {
     });
   }
 
+  
   async run(message) {
-    const content = await request.get(url);
-    const picurl = JSON.parse(content).url;
+    const content = await fetch(url).then(res => res.json());
     message.channel.send('Woof', {
-      files: [picurl],
+      files: [content.url],
     });
   }
 };
