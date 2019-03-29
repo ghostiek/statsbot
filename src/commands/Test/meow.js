@@ -1,7 +1,10 @@
 const { Command } = require('discord.js-commando');
 const path = require('path');
 
-const groupName = __dirname.split(path.sep).pop().toLowerCase();
+const groupName = __dirname
+  .split(path.sep)
+  .pop()
+  .toLowerCase();
 
 module.exports = class MeowCommand extends Command {
   constructor(client) {
