@@ -19,7 +19,6 @@ module.exports = class DogCommand extends Command {
     });
   }
 
-  
   async run(message) {
     const content = await fetch(url).then(res => res.json());
     message.channel.send('Woof', {

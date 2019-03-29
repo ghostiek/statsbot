@@ -7,7 +7,13 @@ const groupName = __dirname
   .pop()
   .toLowerCase();
 
-const url = 'http://aws.random.cat/meow';
+const url = 'https://api.thecatapi.com/v1/images/search';
+
+const { CAT_API_KEY } = require('../../auth/config.json');
+
+const header = {
+  'X-API-KEY': CAT_API_KEY,
+};
 
 module.exports = class CatCommand extends Command {
   constructor(client) {
@@ -20,9 +26,11 @@ module.exports = class CatCommand extends Command {
   }
 
   async run(message) {
-    const content = await fetch(url).then(res => res.json());
+    const content = await fetch(url, {
+      headers: header,
+    }).then(res => res.json());
     message.channel.send('Meow', {
-      files: [content.file],
+      files: content.map(x => x.url),
     });
-  }    
+  }
 };
