@@ -15,25 +15,26 @@ const furtherReadingAliases = ['further reading', 'furtherreading', 'fr'];
 module.exports = class CreateDocCommand extends Command {
   constructor(client) {
     super(client, {
-      name: 'createdoc',
+      name: 'updatedoc',
       group: groupName,
-      memberName: 'createdoc',
-      description: 'Creates a resource',
+      memberName: 'updatedoc',
+      description: 'Updates a resource',
       args: [
         {
           key: 'resourceTopic',
-          prompt: "What is the topic you'd like to add?",
+          prompt: "What is the topic you'd like to update?",
           type: 'string',
         },
         {
           key: 'resourceType',
-          prompt: 'What kind of resource is it? (Overview/Further Reading)',
+          prompt:
+            'What part of the resource would you like to update? (Overview/Further Reading)',
           type: 'string',
           oneOf: overviewAliases.concat(furtherReadingAliases),
         },
         {
           key: 'resourceLink',
-          prompt: "What is the link you'd like to add?",
+          prompt: "What is the link you'd like to use instead?",
           type: 'string',
         },
       ],
@@ -49,20 +50,17 @@ module.exports = class CreateDocCommand extends Command {
     const resource = resourcelist.find(
       x => x.topic.toLowerCase() === resourceTopic.toLowerCase()
     );
-    if (resource !== undefined) {
-      message.channel.send('Command already exists, run updatedoc instead.');
+    if (resource === undefined) {
+      message.channel.send("Command doesn't exist, run createdoc instead");
       return;
     }
 
-    const overviewLink = type === 'overview' ? resourceLink : '';
-    const furtherreadingLink = type === 'furtherreading' ? resourceLink : '';
-
-    const obj = {
-      topic: resourceTopic,
-      overview: [overviewLink],
-      furtherreading: [furtherreadingLink],
-    };
-    resourcelist.push(obj);
+    for (let i = 0; i < resourcelist.length; i += 1) {
+      if (resourcelist[i].topic === resourceTopic) {
+        resourcelist[i][type] = [resourceLink];
+        break;
+      }
+    }
 
     await fs.writeFile(
       './data/resources.json',
@@ -71,6 +69,6 @@ module.exports = class CreateDocCommand extends Command {
         if (err) throw err;
       }
     );
-    message.channel.send('Command successfully added!');
+    message.channel.send('Command successfully updated!');
   }
 };

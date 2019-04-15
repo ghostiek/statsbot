@@ -27,22 +27,22 @@ module.exports = class CreateDocCommand extends Command {
 
   run(message, { resourceTopic }) {
     const resource = resourcelist.find(
-      x => x.Topic.toLowerCase() === resourceTopic.toLowerCase()
+      x => x.topic.toLowerCase() === resourceTopic.toLowerCase()
     );
     if (resource === undefined) {
-      message.channel.send("Resource doesn't exist");
+      message.channel.send(
+        "Resource doesn't exist. Please check https://ghostiek.github.io/StatsResources/ for a full list of commands."
+      );
       return;
     }
 
-    const overviewlinks = resource.Overview.join('\n');
-
     const display = `
-**Topic**: ${resource.Topic}
+**Topic**: ${resource.topic}
 
 **Overview**:
-${overviewlinks}
+${resource.overview.join('\n')}
 **Futher Reading**:
-${resource.FurtherReading.join('\n')}`;
+${resource.furtherreading.join('\n')}`;
     message.channel.send(display);
   }
 };
